@@ -1,0 +1,143 @@
+// Setup
+BACKUP ~XanBG1Friend/Backup~
+AUTHOR ~Kulyok http://forums.pocketplane.net~
+VERSION ~v9bgee~ /* Thanks to Isaya for changes for v9 for BGEE; Kaeloree did the rest, BGEE-wise */
+README ~XanBG1Friend/Readme-XanBG1Friend.txt~
+
+
+// BG:EE TRA compatibility
+ALWAYS
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+  /* It's safe to convert for any language and for all operating systems, no test required */
+
+  /* BG:EE tra conversion : Character encoding for BG II for various languages: ensure the name matches the menu choices */
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY languageencoding BEGIN
+    "English" => "CP1252"
+    "Russian" => "CP1251"
+    "German" => "CP1252"
+    "French" => "CP1252"
+    "Italian" => "CP1252"
+  END
+  OUTER_SPRINT initialencoding ~~
+  ACTION_PHP_EACH languageencoding AS lang => encoding BEGIN
+    ACTION_IF ("%LANGUAGE%" STRING_EQUAL_CASE ~%lang%~ = 1) THEN BEGIN
+      OUTER_SPRINT initialencoding ~%encoding%~
+    END
+  END
+
+  /* Since there is only one component, we don't need a marker file to avoid repeating conversion for each component */
+  ACTION_IF (STRING_LENGTH ~%initialencoding%~ != 0) THEN BEGIN
+    ACTION_IF ("%WEIDU_OS%" STRING_EQUAL_CASE ~WIN32~ = 1) THEN BEGIN
+      /* Only convert for the language selected by passing the directory as parameter */
+      PRINT ~Windows conversion with %initialencoding%~
+      AT_NOW ~xanbg1friend/conv_tra.bat %LANGUAGE% %initialencoding%~
+    END
+    ACTION_IF ("%WEIDU_OS%" STRING_EQUAL_CASE ~OSX~ = 1) OR ("%WEIDU_OS%" STRING_EQUAL_CASE ~UNIX~ = 1) THEN BEGIN
+      /* Only convert for the language selected by passing the directory as parameter */
+      PRINT ~Linux and Mac conversion with %initialencoding%~
+      AT_NOW ~xanbg1friend/conv_tra.sh %LANGUAGE% %initialencoding%~
+    END
+
+    /* The tra files has to be replaced with its counterpart from the utf8 directory, then loaded */
+    /* Otherwise the tra file for dialogs is still with the Windows 1252 / 1251 encoding */
+    MOVE ~xanbg1friend/%LANGUAGE%/utf8/o#xanbg1.tra~ ~xanbg1friend/%LANGUAGE%/o#xanbg1.tra~
+    LOAD_TRA ~xanbg1friend/%LANGUAGE%/o#xanbg1.tra~
+    PRINT ~re-loaded %LANGUAGE% TRA files~
+  END
+END
+END
+
+
+// Languages
+AUTO_TRA ~XanBG1Friend/%s~
+LANGUAGE ~English~ ~English~ ~XanBG1Friend/English/O#XanBG1.tra~
+LANGUAGE ~Russian~ ~Russian~ ~XanBG1Friend/Russian/O#XanBG1.tra~
+LANGUAGE ~German (Translated by Steffen)~ ~German~ ~XanBG1Friend/German/O#XanBG1.tra~
+LANGUAGE ~French (Translated by Eleima)~ ~French~ ~XanBG1Friend/French/O#XanBG1.tra~
+LANGUAGE ~Italian (Translated by totuccio5)~ ~Italian~ ~XanBG1Friend/Italian/O#XanBG1.tra~
+
+// Component
+BEGIN ~Xan's friendship path for BG1~
+
+// BG:EE
+ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+
+  PRINT ~BG:EE detected: Xan.cre, Xan4.cre, and Xan6.cre are patched.~
+
+  COPY_EXISTING ~XAN.CRE~ ~override~
+                ~XAN4.CRE~ ~override~
+                ~XAN6.CRE~ ~override~
+  WRITE_EVALUATED_ASCII 0x248 ~xan~ #8
+  BUT_ONLY_IF_IT_CHANGES
+
+  // CD_STATE_NOTVALID - custom state from CamDawg
+  APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+  UNLESS ~CD_STATE_NOTVALID~
+
+  EXTEND_TOP ~xan.bcs~ ~XanBG1Friend/Scripts/xanbgee.baf~
+
+  COMPILE ~XanBG1Friend/Dialogue/O#XanBGEE.d~
+
+END ELSE BEGIN
+
+// TUTU
+ACTION_IF GAME_IS ~tutu tutu_totsc~ THEN BEGIN
+
+  PRINT ~TUTU detected: _Xan.cre, _Xan4.cre, and _Xan6.cre are patched.~
+  
+  COPY_EXISTING ~_XAN.CRE~ ~override~
+                ~_XAN4.CRE~ ~override~
+                ~_XAN6.CRE~ ~override~
+  WRITE_EVALUATED_ASCII 0x248 ~_Xan~ #8
+  BUT_ONLY_IF_IT_CHANGES
+  
+  // CD_STATE_NOTVALID - custom state from CamDawg
+  APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+  UNLESS ~CD_STATE_NOTVALID~
+  
+  EXTEND_TOP ~_xan.bcs~ ~XanBG1Friend/Scripts/_xan.baf~
+  
+  COMPILE ~XanBG1Friend/Dialogue/O#XanBG1.d~
+
+END ELSE BEGIN 
+
+// BGT
+ACTION_IF GAME_IS ~bgt~ THEN BEGIN
+
+  PRINT ~BGT detected: BGXan.cre, Xan4.cre, and Xan6.cre are patched.~
+  
+  COPY_EXISTING ~BGXAN.CRE~ ~override~
+                ~XAN4.CRE~ ~override~
+                ~XAN6.CRE~ ~override~
+  WRITE_EVALUATED_ASCII 0x248 ~Xan~ #8
+  BUT_ONLY_IF_IT_CHANGES
+  
+  // CD_STATE_NOTVALID - custom state from CamDawg
+  
+  APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+  UNLESS ~CD_STATE_NOTVALID~
+  
+  EXTEND_TOP ~xan.bcs~ ~XanBG1Friend/Scripts/xan.baf~
+  
+  COMPILE ~XanBG1Friend/Dialogue/O#XanBGT.d~
+
+// BG1
+END ELSE BEGIN
+
+  PRINT ~Neither Tutu nor BGT nor BGEE are detected: Xan.cre, Xan4.cre, and Xan6.cre are patched.~
+
+  COPY_EXISTING ~XAN.CRE~ ~override~
+                ~XAN4.CRE~ ~override~
+                ~XAN6.CRE~ ~override~
+  WRITE_EVALUATED_ASCII 0x248 ~Xan~ #8
+  BUT_ONLY_IF_IT_CHANGES
+  
+  EXTEND_TOP ~xan.bcs~ ~XanBG1Friend/Scripts/xanbg.baf~
+  
+  COMPILE ~XanBG1Friend/Dialogue/O#XanBG.d~
+
+END
+
+END
+
+END
