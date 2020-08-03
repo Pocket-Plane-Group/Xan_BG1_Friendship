@@ -1,8 +1,9 @@
 // Setup
 BACKUP ~XanBG1Friend/Backup~
 AUTHOR ~Kulyok http://forums.pocketplane.net~
-VERSION ~v10~ //170605 //packed by jastey
+VERSION ~v11~ 
 /* Thanks to Isaya for changes for v9 for BGEE; Kaeloree did the rest, BGEE-wise */
+/* v10, v11 packed by jastey */
 README ~XanBG1Friend/Readme-XanBG1Friend.txt~
 
 // BG:EE TRA compatibility
@@ -13,7 +14,7 @@ ALWAYS
 
    LAF HANDLE_CHARSETS
     INT_VAR
-      infer_charset = 1
+      infer_charsets = 1
     STR_VAR
       tra_path = EVAL ~%MOD_FOLDER%~
       reload_array = fl#reload

@@ -1,5 +1,5 @@
  			 Xan's friendship path for BG1
-				   Version 10
+				   Version 11
 			  A Pocket Plane Group Project
 			   http://www.pocketplane.net
 
@@ -24,8 +24,7 @@ This mod is Tutu-compatible and BGT-compatible. You can also install the mod
 on Baldur's Gate, Baldur's Gate: Tales of the Sword Coast, 
 Baldur's Gate: The Original Saga, and Baldur's Gate: Enhanced Edition.
 
-Xan, a non-player character from the first game in Baldur's Gate series, is a
-depressed elven mage - enchanter. Notable quotes: "We're all doomed."
+Xan, a non-player character from the first game in Baldur's Gate series, is a depressed elven mage - enchanter. Notable quotes: "We're all doomed."
 "Life is so hollow." "It is hardly worth the effort of trying."
 "What is the point?" "Our quest is vain." "Onward, to futility!"
 
@@ -105,6 +104,11 @@ Special thanks to Kaeloree and Isaya for making the mod work on BGEE.
 -------------------
 5. Version History
 -------------------
+
+Version 11
+-added .ini with metadata to support ALIEN's Project Infinity
+-changed infer_charset -> infer_charsets in tp2
+- Updated to Weidu 246
 
 Version 10
 -changed to using HANDLE_CHARSET
