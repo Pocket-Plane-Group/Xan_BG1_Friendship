@@ -1,5 +1,5 @@
  			 Xan's friendship path for BG1
-				   Version 9
+				   Version 10
 			  A Pocket Plane Group Project
 			   http://www.pocketplane.net
 
@@ -36,11 +36,16 @@ depressed elven mage - enchanter. Notable quotes: "We're all doomed."
 Make sure that Baldur's Gate or ANY game-related utilities are not running,
 and that you are installing the mod into the correct directory.
 
-Please note that you might need to download a different version of Weidu
-(Setup-XanBG1Friend) for BGEE depending on your operating system. Read this for more
-information: 
+Before installing any mods, it is recommended to backup your chitin.key,
+baldur.exe, your entire override directory and your dialog.tlk
+(in case of BG:EE, lang directory).
 
-http://forum.baldursgate.com/discussion/31155/the-hitchhiker-s-guide-to-installing-mods-on-osx/p1
+Unpack XanBG1Friend_v9.zip into your Baldur's Gate directory.
+
+TO INSTALL, UNINSTALL OR REINSTALL THE MOD, run setup-xanbg1friend.exe.
+
+For Baldur's Gate: Enhanced Edition players: you need to install the mod
+in the same folder as your chitin.key file.
 
 -----------------------
 3. General Information
@@ -100,6 +105,11 @@ Special thanks to Kaeloree and Isaya for making the mod work on BGEE.
 -------------------
 5. Version History
 -------------------
+
+Version 10
+-changed to using HANDLE_CHARSET
+-EET compatibility added
+-updated to WeiDU 240
 
 Version 9
 - multi-language BGEE support
