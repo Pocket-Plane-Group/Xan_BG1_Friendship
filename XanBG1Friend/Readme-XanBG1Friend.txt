@@ -20,13 +20,11 @@ Before installing the mod, PLEASE read the installation section.
 
 This mod provides a friendship path for Xan NPC in Baldur's Gate I.
 
-This mod is Tutu-compatible and BGT-compatible. You can also install the mod
-on Baldur's Gate, Baldur's Gate: Tales of the Sword Coast, 
-Baldur's Gate: The Original Saga, and Baldur's Gate: Enhanced Edition.
-
 Xan, a non-player character from the first game in Baldur's Gate series, is a depressed elven mage - enchanter. Notable quotes: "We're all doomed."
 "Life is so hollow." "It is hardly worth the effort of trying."
 "What is the point?" "Our quest is vain." "Onward, to futility!"
+
+The mod is compatible with all Baldur's Gate 1 games (BG1 w/o TotSC, BGT, Tutu, BG:EE, EET).
 
 ----------------
 2. Installation
