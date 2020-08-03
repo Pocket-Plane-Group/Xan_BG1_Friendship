@@ -1,4 +1,4 @@
-# Xan_BG1_Friendship
+# Xan's friendship path for BG1
 This mod provides a friendship path for Xan NPC in Baldur's Gate I.
 
 Xan, a non-player character from the first game in Baldur's Gate series, is a depressed elven mage - enchanter. Notable quotes: "We're all doomed."
